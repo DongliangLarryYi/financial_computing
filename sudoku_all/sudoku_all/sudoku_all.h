@@ -34,11 +34,6 @@ class Sudoku
         }
         return false;
     
-    
-    
-    
-    
-    
     }
     
     
@@ -70,7 +65,6 @@ class Sudoku
             if (x == row) {
                 //x++;
             }
-            
             
             else
                 if (puzzle[row][col] == puzzle[x][col]) {
@@ -172,8 +166,6 @@ class Sudoku
             }
             
         }
-        
-        
         
         return true;
         // check 3 x 3 block validity
@@ -290,8 +282,6 @@ public:
                     }
                     puzzle[i][j] = 0;
                     return false;
-
-                    
                     
                 }
                 
