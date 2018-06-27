@@ -1,10 +1,6 @@
-//
-//  main.cpp
-//  Cauchy_RV
-//
+//  Generate random variables from a Standard Cauchy Distribution
 //  Created by Dongliang Yi on 11/17/15.
 //  Copyright © 2015 Dongliang Yi. All rights reserved.
-//
 
 #include <cstdlib>
 #include <algorithm>
@@ -15,14 +11,15 @@
 #include <fstream>
 using namespace std;
 
+// generate uniform random variables
 double get_uniform()
 {
     return (((float) random())/(pow(2.0, 31.0)-1.0));
 }
-
+// generate Standard Cauchy random variables
 double get_cauchy()
 {
-    return tan(M_PI*(get_uniform() - 0.5));//get cauchy RV.
+    return tan(M_PI*(get_uniform() - 0.5));
 }
 
 int main(int argc, char* argv[])
@@ -37,17 +34,17 @@ int main(int argc, char* argv[])
     for (int i = 0; i < 100; i++)
         count[i] = 0;
     
-    
-    for (int i = 0; i < no_of_trials; i++) {
+    // calculate mean of Cauchy RVs and build Standard Cauchy pdf function
+    for (int i = 0; i < no_of_trials; i++) 
+    {
         Cauchy_RV[i] = get_cauchy();
         mean += Cauchy_RV[i];
         for (int j = 0; j < 100; j++)
             if ((Cauchy_RV[i] >= ((double)(j - 51) / 10)) && (Cauchy_RV[i] < ((double)(j - 50) / 10)))
                 count[j]++;//build pdf
     }
-    
     mean = mean / no_of_trials;
-    
+    // save values to file
     for (int j = 0; j < 100; j++)
     {
         x = (double)(j - 50) / 10;
