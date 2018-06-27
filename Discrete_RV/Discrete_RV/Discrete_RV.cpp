@@ -1,10 +1,7 @@
-//
 //  main.cpp
 //  Discrete_RV
-//
 //  Created by Dongliang Yi on 11/17/15.
 //  Copyright © 2015 Dongliang Yi. All rights reserved.
-//
 
 
 #include <iostream>
@@ -20,8 +17,6 @@ double get_uniform()
 {
     return (((float) random())/(pow(2.0, 31.0)-1.0));
 }
-
-
 
 int main (int argc, char* argv[])
 {
@@ -50,12 +45,10 @@ int main (int argc, char* argv[])
             {
                 Probability_RV[i]=value_just_read_from_file_float;
             }
-            
         }
-        
-        
         for(int i =0; i < number_of_discrete_RV; i++)
-        { for(int j=i+1; j < number_of_discrete_RV; j++)
+        { 
+            for(int j=i+1; j < number_of_discrete_RV; j++)
             {
                 if(Probability_RV[i]<Probability_RV[j])
                 {
@@ -67,7 +60,8 @@ int main (int argc, char* argv[])
         }
         
         cout << "Probability of Events:"<<endl;
-        for (int i=0; i<number_of_discrete_RV; i++) {
+        for (int i=0; i<number_of_discrete_RV; i++) 
+        {
             cout<<"("<<i+1<<"): "<<Probability_RV[i]<<endl;
         }
         
@@ -79,8 +73,6 @@ int main (int argc, char* argv[])
             //cout<< CDF_RV[i]<<endl;
         }
         
-            
-            
         count_number=new int[number_of_discrete_RV];
         for (int i = 0; i < no_of_trials; i++)
         {
@@ -91,22 +83,13 @@ int main (int argc, char* argv[])
                     count_number[j]++;
             }
         }// sum the CDF
-        
         cout << "Empirical Results after {"<<no_of_trials<<"} trials:"<<endl;
         cout<<"(1): "<<(double)count_number[1]/no_of_trials<<endl;
-
         for (int i = 2; i <= number_of_discrete_RV; i++)
         {
             cout<<"("<<i<<"): "<<(double)count_number[i]/no_of_trials-((double)count_number[i-1]/no_of_trials)<<endl;
-
         }
-        
-        
     }
-    
     else
         cout<<"Input error, please check!";
-    
-    
-    
 }
