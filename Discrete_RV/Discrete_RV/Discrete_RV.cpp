@@ -3,7 +3,6 @@
 //  Created by Dongliang Yi on 11/17/15.
 //  Copyright © 2015 Dongliang Yi. All rights reserved.
 
-
 #include <iostream>
 #include <iomanip>
 #include <cmath>
