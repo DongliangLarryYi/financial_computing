@@ -16,7 +16,8 @@ double initial_stock_price, expiration_time, volatility, R;
 int no_of_divisions;
 
 // function to return bigger number
-double max(double a, double b) {
+double max(double a, double b) 
+{
     return (b < a )? a:b;
 }
 
