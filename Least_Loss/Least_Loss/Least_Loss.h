@@ -1,5 +1,17 @@
-//  Least_Loss.h
-//  Have some discussion with my friend Zhou.
+// We have two players Alice and Bob,
+// each have a coin that they can toss. The probability of heads for Alice’s coin
+// is q, and that for Bob’s coin is p, where q < p. They agree to to the following
+// game
+// Each will toss their respective coins n times, Alice wins if and only
+// if she gets more heads than Bob at the end of the n-many tosses.
+// Obviously, the game favors Bob over Alice, but reference [1] studies the following
+// problem
+// What is the optimal value of n that will maximize Alice’s chance of
+// winning?
+
+// [1] V. Addona, S. Wagon, and H. Wilf. How to lose as little as possible. ARS
+// MATHEMATICA CONTEMPORANEA, 4:29–62, 2011.
+
 //  Created by Dongliang Yi on 11/9/15.
 //  Copyright © 2015 Dongliang Yi. All rights reserved.
 
@@ -79,6 +91,7 @@ public:
     
     int search_result(double alice,double bob)
     {
+        // colde according to the theorem 2.2 to find the optimal number.
         float fn = 0, fn_minus_one = 0, fn_plus_one = 0;
         int n = 1;
         do
@@ -89,9 +102,8 @@ public:
             fn_plus_one = theoretical_value(alice_probability, bob_probability, n + 1);
         } while (fn < fn_minus_one || fn < fn_plus_one);
         
-        cout << "The theoretical optimal winning possibility for Alice is " << theoretical_value(alice, bob, n) <<" for " <<n<< " tosses!"<<endl;
+        cout << "The theoretical optimal winning possibility for Alice is " << theoretical_value(alice, bob, n) <<" for " << n << " tosses!"<<endl;
         return n;
-        //write the colde according to the theorem 2.2 to find the optimal number.
     }
 };
 #endif
