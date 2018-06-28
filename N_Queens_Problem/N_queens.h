@@ -1,4 +1,9 @@
-//  N_Queens_Problem
+// The original version of this problem goes like this – You have a 8 × 8 chessboard, and you have to place 8 queens on this chessboard such that no two of
+// them threaten each other. Since a queen can attack any piece that shares a row,
+// column, or diagonal, with it, we are essentially looking to place 8 elements in a
+// 8 × 8 grid such that no two of them share a common row, column, or diagonal.
+// The n × n version of this problem asks you to place n queens on a n × n
+// chessboard.
 //  Created by Dongliang Yi on 9/10/15.
 //  Copyright (c) 2015 Dongliang Yi. All rights reserved.
 
@@ -15,38 +20,40 @@ class Board
     // the (row, col) position is not safe.
     bool is_this_position_safe(int row, int col)
     {
-        //return true; //test use
-        for (int i = 0 ; i < col; i++) //this is used to make sure it is safe on the same row
+        //this is used to make sure it is safe on the same row
+        for (int i = 0 ; i < col; i++) 
         {
             if (1 == chess_board[row][i])
             {
                 return false;
             }
         }
-        for (int i = 0 ; i < row; i++)//this is used to check the safety on the same colume
+        //this is used to check the safety on the same colume
+        for (int i = 0 ; i < row; i++)
         {
             if (1 == chess_board[i][col])
             {
                 return false;
             }
         }
-        for (int i = 0 ; (row-i) >= 0 && (col-i) >= 0 ; i++) { //check diagonal
-            if (1 == chess_board[row-i][col-i]) {
+        //check diagonal
+        for (int i = 0 ; (row-i) >= 0 && (col-i) >= 0 ; i++) 
+        { 
+            if (1 == chess_board[row-i][col-i]) 
+            {
                 return false;
             }
         }
-        for (int i = 0 ; (row+i) < size && (col-i) >= 0 ; i++) {//check back-diagonal
-            if (1 == chess_board[row+i][col-i]) {
+        //check back-diagonal
+        for (int i = 0 ; (row+i) < size && (col-i) >= 0 ; i++) 
+        {
+            if (1 == chess_board[row+i][col-i]) 
+            {
                 return false;
             }
         }
         return true;
     }
-    
-    // write the appropriate code on your own that returns
-    // "true" if the (row,col) position is safe.  If it is
-    // unsafe (i.e. some other queen can threaten this position)
-    // return "false"
     
     // private member function: initializes the (n x n) chessboard
     void initialize(int n)
@@ -63,12 +70,8 @@ class Board
                 chess_board[i][j] = 0;
             }
         }
-    // write the appropriate code that uses the pointer-to-pointer
-        // method to initialize the (n x n) chessboard.  Once initialized,
-        // put zeros in all entries.  Later on, if you placed a queen in
-        // the (i,j)-th position, then chessboard[i][j] will be 1.
     }
-    // private member function: prints the board position
+    // private member function: prints the solved board position
     void print_board()
     {
         std::cout << size << "-Queens Problem Solution" << std::endl;
@@ -83,8 +86,6 @@ class Board
             }
             cout << endl;
         }
-        // write the appropriate code here to print out the solved
-        // board as shown in the assignment description
     }
     
     // private member function: recursive backtracking
@@ -109,9 +110,6 @@ class Board
             }
             return false;
         }
-        // implement the recursive backtracking procedure described in
-        // pseudocode format in figure 1 of the description of the first
-        // programming assignment
     }
     
 public:
