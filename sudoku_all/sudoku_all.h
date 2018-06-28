@@ -1,5 +1,7 @@
-//  sudoku_all.h
-//  sudoku_all
+// A Sudoku Puzzle consists of a 9 × 9 grid, that is subdivided into nine 3 × 3
+// blocks. Each entry in the grid must be filled with a number from {1, 2, . . . , 9},
+// where some entries are already filled in. The constraints are that every number
+// should occur exactly once in each row, each column, and each 3 × 3 block.
 //  Created by Dongliang Yi on 9/14/15.
 //  Copyright (c) 2015 Dongliang Yi. All rights reserved.
 
@@ -11,10 +13,10 @@ using std::vector;
 using namespace std;
 class Sudoku
 {
-    // Private
+    // declare private variables in the class 
     int puzzle[9][9];
     int count = 0;//this is used to count all solutions
-    bool Remain_Zero_Check(int row, int col) // this is used to check whether there is any zero left.
+    bool Remain_Zero_Check(int row, int col) // this is used to check whether there is any zero/blank field left.
     {
         for (int i = row; i <9; i++)
         {
@@ -26,8 +28,8 @@ class Sudoku
         }
         return false;
     }
-    // Private member function that checks if the named row is valid
-    bool row_valid(int row, int col)//check row
+    // Private member function that checks if row is valid
+    bool row_valid(int row, int col)
     {
         for (int x = 0; x <9; x++ )
         {
@@ -40,44 +42,43 @@ class Sudoku
                 }
         }
         return true;
-        // write code that checks if "row" is valid
     }
     
-    // Private member function that checks if the named column is valid
-    bool col_valid(int row, int col)//check col
+    // Private member function that checks if column is valid
+    bool col_valid(int row, int col)
     {
         for (int x = 0; x <9; x++ ) {
             if (x == row) {
-                //x++;
             }
             else
-                if (puzzle[row][col] == puzzle[x][col]) {
+                if (puzzle[row][col] == puzzle[x][col]) 
+                {
                     return false;
                 }
         }
         return true;
-        // check validity of "col"
     }
     
-    // Private member function that checks if the named 3x3 block is valid
-    bool block_valid(int row, int col)//check block, details please see previous one
+    // Private member function that checks if 3x3 block is valid
+    bool block_valid(int row, int col)
     {
+        // condition on current row and col position
         if (0 == row && 0 == col)
-        { for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
+        { 
+            for (int i = 0; i < 3; i++)
             {
-                if ( i == row && j == col) {
-                    //j++;
+                for (int j = 0; j < 3; j++)
+                {
+                    if ( i == row && j == col) 
+                    {
+                    }
+                    else
+                        if(puzzle[row][col] == puzzle[i][j]) // return false if duplicate
+                            return false;
                 }
-                else
-                    if(puzzle[row][col] == puzzle[i][j])
-                        return false;
             }
-        }
             
         }
-        
         if (0 == row && 0 != col)
         {
             int inter1 = col/3;
@@ -85,8 +86,8 @@ class Sudoku
             {
                 for (int j = 3*inter1; j < 3*inter1 + 3; j++)
                 {
-                    if ( i == row && j == col) {
-                        //j++;
+                    if ( i == row && j == col) 
+                    {
                     }
                     else
                         if(puzzle[row][col] == puzzle[i][j])
@@ -94,7 +95,6 @@ class Sudoku
                 }
             }
         }
-        
         if (0 == col && 0 != row)
         {
             int inter1 = row/3;
@@ -102,8 +102,8 @@ class Sudoku
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if ( i == row && j == col) {
-                        // j++;
+                    if ( i == row && j == col) 
+                    {
                     }
                     else
                         if(puzzle[row][col] == puzzle[i][j])
@@ -111,7 +111,6 @@ class Sudoku
                 }
             }
         }
-        
         if (0 != col && 0 != row)
         {
             int inter1 = row/3;
@@ -120,8 +119,8 @@ class Sudoku
             {
                 for (int j = 3*inter2; j < 3*inter2+3; j++)
                 {
-                    if ( i == row && j == col) {
-                        // j++;
+                    if ( i == row && j == col) 
+                    {
                     }
                     else
                         if(puzzle[row][col] == puzzle[i][j])
@@ -130,7 +129,6 @@ class Sudoku
             }
         }
         return true;
-        // check 3 x 3 block validity
     }
     
 public:
@@ -141,7 +139,7 @@ public:
     {
         ifstream input_file(argv[1]);
         int value_just_read_from_file;
-        if (input_file.is_open()) // If "Data.txt" exists in the local directory
+        if (input_file.is_open()) // check whether txt file exists in the local directory
         {
             for (int i=0; i<9; i++)
             {
@@ -156,8 +154,6 @@ public:
         }
         else
             cout << "Input file Data.txt does not exist in PWD" << endl;
-        // write code that reads the input puzzle using the
-        // guidelines of figure 23 of the bootcamp material
     }
     
     // Public member function that prints the puzzle when called
@@ -167,7 +163,6 @@ public:
         std::cout << std::endl << "Board Position" << std::endl;
         if (count >= 1)
             std::cout << std::endl << "Solution" << count<< ":"<< std::endl;
-
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
@@ -207,10 +202,9 @@ public:
                     for (int k = 1; k<=9; k++)
                     {
                         puzzle[i][j] = k;
+                        // recursion to find solution
                         if ((1==row_valid(i,j)) && (1 == col_valid(i,j)) && 1 == block_valid(i, j) && Solve(i, j))
                         {
-                            //print_puzzle();
-                            //return true;
                         }
                     }
                     puzzle[i][j] = 0;
@@ -225,11 +219,5 @@ public:
     {
          std::cout << std::endl << "There are total " <<--count<<" solution(s)!"<< std::endl;
     }
-
-    // this part of the code identifies the row and col number of the
-    // first incomplete (i.e. 0) entry in the puzzle.  If the puzzle has
-    // no zeros, the variable row will be 9 => the puzzle is done, as
-    // each entry is row-, col- and block-valid...
-    // use the pseudo code of figure 3 of the description
 };
 #endif
