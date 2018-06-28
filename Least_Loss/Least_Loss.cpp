@@ -2,7 +2,6 @@
 //  Copyright © 2015 Dongliang Yi. All rights reserved.
 // IE523: Financial Computation
 // "How to lose as little as possible" by Addona, Wagon and Wilf
-// Written by Prof. Sreenivas
 
 #include <iostream>
 #include <iomanip>
